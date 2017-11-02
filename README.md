@@ -10,7 +10,7 @@ This is not intended as a final solution, or a long-term production plugin. Use 
 ### http://www.example.com/product/variable-widget
 Standard WooCommerce behaviour. An AggregateOffer will be output with Min/Max prices.
 
-```json
+```jsonld
 {
     "@type": "Product",
     "@id": "http:\/\/www.example.com\/product\/variable-widget\/",
@@ -39,7 +39,7 @@ Standard WooCommerce behaviour. An AggregateOffer will be output with Min/Max pr
 ### http://www.example.com/my-variable-widget?attribute_pa_color=red
 A variation-specific Offer will **replace** the AggregateOffer. 
 
-```json
+```jsonld
 {
     "@type": "Product",
     "@id": "http:\/\/www.example.com\/product\/variable-widget\/",
