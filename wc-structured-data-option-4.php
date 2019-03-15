@@ -10,6 +10,7 @@
  * WC tested up to: 3.2.0
  * Author URI: http://www.leewillis.co.uk/
  * License: GPLv3
+ * GitHub Plugin URI: https://github.com/leewillis77/wc-structured-data-option-4
  */
 
 add_filter( 'woocommerce_structured_data_product', function( $markup, $product ) {
@@ -26,6 +27,7 @@ add_filter( 'woocommerce_structured_data_product', function( $markup, $product )
 		unset( $markup_offer['highPrice'] );
 		$markup_offer['@type'] = 'Offer';
 		$markup_offer['price'] = wc_format_decimal( $variation->get_price(), wc_get_price_decimals() );
+		$markup_offer['priceValidUntil'] = date('Y') . '-12-31';
 		$markup_offer['url'] = $variation->get_permalink();
 		$markup['offers'][0] = apply_filters( 'woocommerce_structured_data_product_offer', $markup_offer, $product );
 	}
