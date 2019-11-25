@@ -36,4 +36,4 @@ add_filter( 'woocommerce_structured_data_product', function( $markup, $product )
 		$markup['offers'][0] = apply_filters( 'woocommerce_structured_data_product_offer', $markup_offer, $product );
 	}
 	return $markup;
-}, 99, 2);
+}, 9, 2);
