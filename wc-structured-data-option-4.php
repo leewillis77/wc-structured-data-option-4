@@ -21,6 +21,15 @@ add_filter( 'woocommerce_structured_data_product', function( $markup, $product )
 	$variation_id = $data_store->find_matching_product_variation( $product, wp_unslash( $_GET ) );
 	$variation    = $variation_id ? wc_get_product( $variation_id ) : false;
 	if ( ! empty( $variation ) ) {
+		$markup['name']        = $variation->get_name(); //Fix product variation name
+		$markup['sku']         = $variation->get_sku() != '' ? $variation->get_sku() : $markup['sku']; //Fix product variation SKU
+		$markup['url']         = $variation->get_permalink(); //Fix product variation URL
+		if ( $id_image = $variation->get_image_id() ) {
+			if ( $image = wp_get_attachment_url( $id_image ) ) {
+				//Yoast SEO kills this and falls back to the post featured image, but if Yoast is not being used, this works just fine for the WooCommercece generated schema
+				$markup['image'] = $image;
+			}
+		}
 		$price_valid_until = date( 'Y-12-31', current_time( 'timestamp', true ) + YEAR_IN_SECONDS );
 		if ( $variation->is_on_sale() && $variation->get_date_on_sale_to() ) {
 			$price_valid_until = date( 'Y-m-d', $variation->get_date_on_sale_to()->getTimestamp() );
